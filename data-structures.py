@@ -217,6 +217,7 @@ class BianaryNode:
 # Adjacencies can overlap. 
 
 class GraphNode:
+    """Stores data and adjacent connections"""
     def __init__(self, data, adjacent=None):
         assert adjacent = None or isinstance(adjacent, set), \
             "adjacencies must be a set!"
@@ -230,10 +231,12 @@ class GraphNode:
 
 
 class Graph:
+    """Stores a set of nodes"""
     def __init__(self):
         self.nodes = set()
 
     def add_node(self, data):
+        """Create node from data, add to graph set"""
         self.nodes.add(GraphNode(data))
 
     def find_connection_iteratively(self, data1, data2):
@@ -269,7 +272,21 @@ class Graph:
         if data1 == data2:
             return True
 
-        # base case: 
+        # base case: seen set is empty, so make a new one
+        if not seen:
+            seen = set()
+
+        # progress toward base case: 
+        # add current to seen set
+        seen.add(data1)
+        # get unseen adjacencies, check each for connection:
+        unseen_adjacencies = data1.adjacenct - seen
+        for unseen in unseen_adjacencies:
+            if find_connection_recursively(unseen, data2, seen):
+                # if returned out of callstack, unseen == data2
+                return True
+
+        return False
 
 
 
