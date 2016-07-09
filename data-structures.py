@@ -289,5 +289,104 @@ class Graph:
         return False
 
 
+"""Summary of Data Structures"""
+# RUNTIMES
+# Array/list:
+# Index:    constant
+# Search:   linear
+# Add-R:    constant
+# Add-L:    linear
+# Pop-R:    constant
+# Pop-L:    linear
+
+# Singly Linked List:
+# Index:    linear
+# Search:   linear
+# Add-R:    constant
+# Add-L:    constant (w/ head)
+# Pop-R:    linear
+# Pop-L:    constant (w/ head)
+
+# Doubly Linked List:
+# Index:    linear
+# Search:   linear
+# Add-R:    constant
+# Add-L:    constant
+# Pop-R:    constant
+# Pop-L:    constant
+
+# Queue (as array):
+# Index:    -
+# Search:   -
+# Add-R:    constant
+# Add-L:    -
+# Pop-R:    -
+# Pop-L:    linear
+
+# Queue (as LL/DLL):
+# Index:    -
+# Search:   -
+# Add-R:    constant
+# Add-L:    -
+# Pop-R:    -
+# Pop-L:    constant
+
+# Stack (as array/LL/DLL):
+# Index:    -
+# Search:   -
+# Add-R:    constant
+# Add-L:    -
+# Pop-R:    constant
+# Pop-L:    -
+
+# Deque (as DLL):
+# Index:    -
+# Search:   -
+# Add-R:    constant
+# Add-L:    constant
+# Pop-R:    constant
+# Pop-L:    constant
 
 
+# MEMORY/SPACE COMPLEXITY
+# Hash Map
+# Get:      constant
+# Add:      constant
+# Delete:   constant
+# Iterate:  linear
+# Memory:   medium
+
+# Set (like hash map of just keys):
+# Get:      constant
+# Add:      constant
+# Delete:   constant
+# Iterate:  linear
+# Memory:   medium
+
+# Bianary Search Tree:
+# Get:      lg(n)
+# Add:      linear (b/c could req re-balance)
+# Delete:   linear (b/c could req re-balance. Del leaf is constant)
+# Iterate:  constant (just one node to next, b/c of pointer)
+# Memory:   small (why?)
+
+# Tree:
+# Get:      linear
+# Add:      constant (if you know where it goes)
+# Delete:   constant (if you know where it is)
+# Iterate:  constant (just from one to the next, b/c of pointer)
+# Memory:   small
+
+# Ordered Set (Hash map + DLL):
+# Get:      constant
+# Add:      constant
+# Delete:   constant
+# Iterate:  constant
+# Memory:   huge
+
+# Ordered Dict (Hash map + DLL):
+# Get:      constant
+# Add:      constant
+# Delete:   constant
+# Iterate:  constant
+# Memory:   huge
