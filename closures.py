@@ -19,17 +19,7 @@ def count():
 >>> count()
 1
 >>> count()
-2
-
-# In the above example, the 'counter' variable could get messed up somewhere
-# else:
-
->>> count()
-0
->>> count()
-1
->>> count()
-2
+2  # but, the 'counter' variable could get messed up somewhere else:
 >>> counter = 0
 >>> count()
 0  #oops!! 
@@ -47,20 +37,6 @@ def counter_outer():
     # return a REFERENCE to the inner fn (don't call it here!!)
     return count_inner
 
-# instantiate separate versions of the outer fn
->>> counter_1 = counter_outer()
->>> counter_2 = counter_outer()
-
->>> counter_1()
-0
->>> counter_1()
-1
->>> counter_1()
-2
->>> counter_2()
-0  # the count starts over for the different fn! 
-
-# straight from console: 
 """
 >>> def counter_outer():
 ...     counter = [0]
@@ -90,3 +66,36 @@ def counter_outer():
 # same variable in different instances. 
 
 # This is very common practice in javascript - by using inline fn's
+
+# In Python, other clever ways to do this - hide a variable for use by 
+# different instances - is with classes or generator objects: 
+
+class Counter:
+    def __init__(self):
+        self.counter = 0
+
+    def count(self):
+        self.counter += 1
+        print self.counter
+
+"""
+>>> class Counter(object):
+...     def __init__(self):
+...             self.counter = 0
+...     def count(self):
+...             self.counter += 1
+...             print self.counter
+... 
+>>> counter_1 = Counter()
+>>> counter_2 = Counter()
+>>> counter_1.count()
+1
+>>> counter_1.count()
+2
+>>> counter_1.count()
+3
+>>> counter_2.count()
+1
+"""
+
+
