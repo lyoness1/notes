@@ -2,29 +2,40 @@
 
 # A closure is when a fn accesses a variable outside of its scope:
 
-counter = 0
+_counter = 0
 def count():
     # have to tell fn that it's looking for a globally defined variable
-    global counter
+    global _counter
     # print it
-    print counter
+    print _counter
     # increment it
-    counter += 1
+    _counter += 1
 
-# in the above, the fn has access to counter as a global variable, outside of
+# in the above, the fn has access to _counter as a global variable, outside of
 # itself. This makes count() a 'closure'.
 
->>> count()
-0
+# But, if _counter gets messed up elsewhere in the code... 
+
+"""
+>>> _counter = 0
+>>> def count():
+...     global _counter
+...     _counter += 1
+...     print _counter
+... 
 >>> count()
 1
 >>> count()
-2  # but, the 'counter' variable could get messed up somewhere else:
->>> counter = 0
+2
 >>> count()
-0  #oops!! 
+3
+>>> _counter = 0
+>>> count()
+1  
+"""
 
-# So, we can wrap it as a private variable in an outside fn:
+# oops! It started over by accident! This makes global variables bad practice. 
+# So, we can wrap it as a private variable in an outside 'closure' fn:
 
 def counter_outer():
     # we need to wrap it in a list, so it is mutable
@@ -63,12 +74,15 @@ def counter_outer():
 # now, counter_outer() has closed over the variable 'counter', so each 
 # instantiation of the function counter() (i.e. counter_1 and counter_2) have 
 # different 'counter' variables for themselves. This way, we can reuse the 
-# same variable in different instances. 
+# same variable in different instances. And we can't mess the counter variable
+# up outside of the fn. 
 
 # This is very common practice in javascript - by using inline fn's
 
 # In Python, other clever ways to do this - hide a variable for use by 
 # different instances - is with classes or generator objects: 
+
+# The class version: 
 
 class Counter:
     def __init__(self):
@@ -98,4 +112,30 @@ class Counter:
 1
 """
 
+# Or, the generator version:
+
+def counter_generator():
+    counter = 0
+    while True:
+        counter += 1
+        yield counter
+
+"""
+>>> def counter_generator():
+...     counter = 0
+...     while True:
+...             counter += 1
+...             yield counter
+... 
+>>> counter_1 = counter_generator()
+>>> counter_2 = counter_generator()
+>>> next(counter_1)
+1
+>>> next(counter_1)
+2
+>>> next(counter_1)
+3
+>>> next(counter_2)
+1
+"""
 
