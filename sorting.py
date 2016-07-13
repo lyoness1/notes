@@ -122,11 +122,8 @@ def quick_sort(arr):
 
     """
 
-    print "sorting: ", arr
-
     # base case:
     if len(arr) < 2:
-        print "returning: ", arr
         return arr
 
     pivot_idx = 0
@@ -134,30 +131,27 @@ def quick_sort(arr):
 
     # loop all the way through list with right_idx
     while checking_idx < len(arr):
-        print "checking %s against pivot %s"%(arr[checking_idx], arr[pivot_idx])
         # if an element encountered is less than pivot, move it back to to_place
         # increment to_place to position right of elements less than pivot
         # (this is where the pivot will end up after passing through entire arr)
         if arr[checking_idx] < arr[pivot_idx]:
-            print "moving %s to left of pivot"%(arr[checking_idx])
             to_move = arr.pop(checking_idx)
             arr.insert(pivot_idx, to_move)
             pivot_idx += 1
-            print arr
         # continue checking rest of list
         checking_idx += 1
 
-
-    print "sublist has been sorted around pivot %i: "%(arr[pivot_idx]), arr
-
     # now all elements left of pivot are smaller, all elements after are larger
     # call self recursively on left and right segments, not including pivot
-    quick_sort(arr[:pivot_idx])
-    quick_sort(arr[pivot_idx+1:])
+    lower_side = quick_sort(arr[:pivot_idx])
+    upper_side = quick_sort(arr[pivot_idx+1:])
 
-    return arr
+    return lower_side + [arr[pivot_idx]] + upper_side
 
-# Analysis: doesn't work. try using helper fn. 
+# Analysis: 
+# Runtime: worst case: O(n^2) (only if WORST case!). Usually O(nlg(n))
+# Space: I only got this particular code to work by contatinating lists in the
+# return statement, so that uses extra space. 
 
 
 
