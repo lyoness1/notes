@@ -125,5 +125,38 @@ def find_shortest_path(graph, current, destination, path=[]):
 
     """
 
+    # create a new list so not to mess up the old ones in the stack 
+    path = path + [current]
+
+    # base case: reached destination
+    if current == destination:
+        return path
+
+    # base case: dead end
+    if current not in graph:
+        reutrn None
+
+    # difference: keep track of shortest path
+    shortest = None
+
+    # recursively progress for each possible step forward
+    for node in graph[current]:
+        if node not in path: 
+            newpath = find_shortest_path(graph, node, destination, path)
+            # if recursion returns a path
+            if newpath:
+                # if we don't have shortest yet, or newpath is shorter
+                if not shortest or len(newpath) < len(shortest):
+                    shortest = newpath
+
+    return shortest
+
+
+
+
+
+
+
+
 
 
