@@ -9,7 +9,7 @@
 # ITERATION: loops continuously until solution is found. 
 # BOTTOM UP: starts at bottom, works up to answer.
 
-# MEMORIZATION: uses space, saves time, memorizes previous smaller solutions
+# MEMOIZATION: uses space, saves time, memorizes previous smaller solutions
 
 
 # EXAMPLE: Factorial
